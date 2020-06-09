@@ -1,0 +1,12 @@
+name: 'Slack'
+description: 'Sends the build status to a Slack webhook.'
+inputs:
+  webhook:
+    description: 'The Slack webhook URL'
+    required: true
+  job-status:
+    description: 'The status of the current job.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'action.js'
