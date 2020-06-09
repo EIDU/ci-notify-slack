@@ -10,6 +10,9 @@ inputs:
   text:
     description: 'The text part of the slack message.'
     required: false
+  artifact-url:
+    description: 'The url to any built artifact.'
+    required: false
 runs:
   using: 'node12'
   main: 'action.js'

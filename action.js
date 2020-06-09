@@ -5,6 +5,7 @@ const slack = require('@slack/webhook');
 const webhook = new slack.IncomingWebhook(core.getInput('webhook'));
 const jobStatus = core.getInput('job-status');
 const customText = core.getInput('text');
+const artifactUrl = core.getInput('artifact-url');
 
 async function run() {
     try {
@@ -26,7 +27,8 @@ async function run() {
             attachments: [{
                 color: jobStatus == 'success' ? 'good' : jobStatus == 'failure' ? 'danger' : 'warning',
                 text: link(repository, repositoryUrl) + ' • ' +
-                      link(`${workflow} • run ${runNumber} • ${jobStatus}`, runUrl),
+                      link(`${workflow} • run ${runNumber} • ${jobStatus}`, runUrl) +
+                      (!artifactUrl ? '' : '\nThe APK can be found here: ' + link(artifactUrl, artifactUrl)),
                 fields: [
                     field('Branch', link(branch, branchUrl)),
                     field('Commit', link(commit, commitUrl)),
