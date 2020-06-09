@@ -4,6 +4,7 @@ const slack = require('@slack/webhook');
 
 const webhook = new slack.IncomingWebhook(core.getInput('webhook'));
 const jobStatus = core.getInput('job-status');
+const customText = core.getInput('text');
 
 async function run() {
     try {
@@ -21,6 +22,7 @@ async function run() {
         const runUrl = `${repositoryUrl}/actions/runs/${runId}`;
 
         await webhook.send({
+            text: customText,
             attachments: [{
                 color: jobStatus == 'success' ? 'good' : jobStatus == 'failure' ? 'danger' : 'warning',
                 text: link(repository, repositoryUrl) + ' • ' +

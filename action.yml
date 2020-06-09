@@ -7,6 +7,9 @@ inputs:
   job-status:
     description: 'The status of the current job.'
     required: true
+  text:
+    description: 'The text part of the slack message.'
+    required: false
 runs:
   using: 'node12'
   main: 'action.js'
