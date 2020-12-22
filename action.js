@@ -28,7 +28,7 @@ async function run() {
                 color: jobStatus == 'success' ? 'good' : jobStatus == 'failure' ? 'danger' : 'warning',
                 text: link(repository, repositoryUrl) + ' • ' +
                       link(`${workflow} • run ${runNumber} • ${jobStatus}`, runUrl) +
-                      (!artifactUrl ? '' : '\nThe APK can be found here: ' + link(artifactUrl, artifactUrl)),
+                      (!artifactUrl || jobStatus !== 'success' ? '' : '\nThe APK can be found here: ' + link(artifactUrl, artifactUrl)),
                 fields: [
                     field('Branch', link(branch, branchUrl)),
                     field('Commit', link(commit, commitUrl)),
